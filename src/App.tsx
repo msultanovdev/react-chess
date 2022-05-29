@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import BoardComponent from './components/BoardComponent/BoardComponent';
+import LostFigures from './components/LostFigures/LostFigures';
 import { Board } from './components/models/Board';
+import { Colors } from './components/models/Colors';
+import { Player } from './components/models/Player';
+import Timer from './components/Timer/Timer';
 
 const App = () => {
   const [board, setBoard] = useState(new Board());
+  const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE));
+  const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK));
+  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
 
   useEffect(() => {
     restart();
+    setCurrentPlayer(whitePlayer);
   }, []);
 
   function restart() {
@@ -17,12 +25,32 @@ const App = () => {
     setBoard(newBoard);
   }
 
+  function swapPlayer() {
+    setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer);
+  }
+
   return (
     <div className="app">
+      <Timer 
+        restart={restart}
+        currentPlayer={currentPlayer}
+      />
       <BoardComponent
         board={board}
         setBoard={setBoard}
+        currentPlayer={currentPlayer}
+        swapPlayer={swapPlayer}
       />
+      <div>
+        <LostFigures 
+          title="Black Figures" 
+          figures={board.lostBlackFigures} 
+        />
+        <LostFigures 
+          title="White Figures" 
+          figures={board.lostWhiteFigures} 
+        />
+      </div>
     </div>
   );
 }

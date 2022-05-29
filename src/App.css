@@ -3,7 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  background-color: #8c8c8c87;
+  font-family: 'Oleo Script Swash Caps', cursive;
+}
 .app {
   width: 100vw;
   height: 100vh;
@@ -50,4 +53,12 @@
   width: 12px;
   border-radius: 50%;
   background-color: rgb(17, 115, 17);
+}
+
+.lost {
+  height: calc(50vh - 60px);
+  padding: 30px;
+  margin-left: 50px;
+  background-color: lightgray;
+  font-size: 20px;
 }

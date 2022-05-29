@@ -1,0 +1,8 @@
+.lost-figure {
+    display: flex;
+    align-items: center;
+}
+
+.lost-figure__icon {
+    margin-left: 5px;
+}
