@@ -7,6 +7,7 @@ export class Cell {
     readonly y: number;
     readonly color: Colors;
     figure: Figure | null;
+    
     board: Board;
     available: boolean;
     id: number;
@@ -19,5 +20,13 @@ export class Cell {
         this.board = boadr;
         this.available = false;
         this.id = Math.random();
+    }
+
+    moveFigure(target: Cell) {
+        if(this.figure && this.figure?.canMove(target)) {
+            this.figure.moveFigure(target);
+            target.figure = this.figure;
+            this.figure = null;
+        }
     }
 }
